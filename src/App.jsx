@@ -50,6 +50,10 @@ function App() {
                 style={{ width: "100%" }}
               />
             </div>
+            <div className="first-slide-navigation-button">
+                <span>{`>`}</span>
+                <span>{`<`}</span>
+            </div>
           </div>
         </div>
 
