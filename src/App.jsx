@@ -1,6 +1,18 @@
 import { BsBasket3 } from "react-icons/bs";
+import { useEffect, useState } from 'react'
 //BsSearch
+
 function App() {
+  const [isDisplayFirstImageInFirstSlise, setIsDisplayFirstImageInFirstSlise]=useState(false);
+  const MINUTE_MS = 10000;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log(new Date().toLocaleTimeString);
+    }, MINUTE_MS);
+
+    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+  }, [])
   return (
     <>
       <div className="header">
@@ -21,26 +33,23 @@ function App() {
           </div>
         </div>
 
-        <div className="slideshow-container">
-          <div className="mySlides fade">
-            <img src="https://www.banimode.com/img/cms/020810/1698820023.jpg" />
+        <div className="advertise-slide-show">
+          <div className="second-slide">
           </div>
+          <div className="first-slide">
+            <div className="first-slide-img1">
+              <img src="https://www.banimode.com/img/cms/020810/1698820023.jpg" style={{ width: "100%" }} />
+            </div>
 
-          <div className="mySlides fade">
-            <img src="https://www.banimode.com/img/cms/020809/1698734914.jpg"  />
+            <div className="first-slide-img2" +{isDisplayFirstImageInFirstSlise}>
+              <img src="https://www.banimode.com/img/cms/020809/1698734914.jpg" style={{ width: "100%" }} />
+            </div>
           </div>
-
-          <a className="prev">
-            ❮
-          </a>
-          <a className="next">
-            ❯
-          </a>
         </div>
-      </div>
-      {/* <div className="navbar-categoreis">
+
+      <div className="navbar-categoreis">
        
-      </div> */}
+      </div>
     </>
   );
 }
