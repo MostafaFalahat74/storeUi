@@ -1,5 +1,5 @@
 body {
-  background-color: #0B0807;
+  background-color: #0b0807;
 }
 
 .container {
@@ -33,7 +33,7 @@ body {
     justify-content: end;
 
     button {
-      background-color: #32CD32;
+      background-color: #32cd32;
       color: white;
       border: none;
       font-size: 16px;
@@ -48,7 +48,8 @@ body {
     }
   }
 
-  img {}
+  img {
+  }
 }
 
 // //////////slide show
@@ -77,7 +78,6 @@ body {
 //     border-radius: 0 3px 3px 0;
 //     user-select: none;
 //   }
-
 
 //   .next {
 //     right: 0;
@@ -112,7 +112,7 @@ body {
 //   }
 
 //   @keyframes fade {
-//     from {opacity: .4} 
+//     from {opacity: .4}
 //     to {opacity: 1}
 //   }
 
@@ -120,25 +120,44 @@ body {
 //   @media only screen and (max-width: 300px) {
 //     .prev, .next,.text {font-size: 11px}
 //   }
-// /// 
+// ///
 .advertise-slide-show {
-  background-color: #32CD32;
+  background-color: #32cd32;
 
   .first-slide {
     height: 100%;
     width: 66%;
     position: relative;
-    .false{
-        display: none;
+
+    .false {
+      display: none;
     }
-    .true{
+    .true {
+      display: flex;
+    }
+    .first-slide-img1 {
+      position: absolute;
+    }
+    .first-slide-img2 {
+      position: absolute;
+    }
+    .slide-controll {
+      position: absolute;
+      right: 0px;
+      bottom: 0px;
+      height: 50px;
+      width: 90px;
+      display: flex;
+      justify-content: space-between;
+      span {
         display: flex;
-    }
-    .first-slide-img1{
-      position: absolute;
-    }
-    .first-slide-img2{
-      position: absolute;
+        justify-content: center;
+        align-items: center;
+        background-color: brown;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
     }
   }
 
