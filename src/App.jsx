@@ -3,17 +3,38 @@ import { useEffect, useState } from "react";
 //BsSearch
 
 function App() {
+  const [intervalId, setIntervalId] = useState(null);
   const [isDisplayFirstImageInFirstSlise, setIsDisplayFirstImageInFirstSlise] =
     useState(false);
-  const MINUTE_MS = 10000;
+  const [isDisplayImageInSecondSlide, setDisplayImageInSecondSlide] =
+    useState(0);
+
+  const [isMouseInterInFirstSlide, setMouseInterInFirstSlide] = useState(false);
+  const [isMouseInterInSecondSlide, setMouseInterInSecondSlide] = useState(false);
+  let MINUTE_MS = 10000;
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsDisplayFirstImageInFirstSlise((isDisplayFirstImageInFirstSlise)=>!isDisplayFirstImageInFirstSlise);
+      setIsDisplayFirstImageInFirstSlise((isDisplayFirstImageInFirstSlise) => !isDisplayFirstImageInFirstSlise);
     }, MINUTE_MS);
-
-    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+    setIntervalId(interval);
   }, []);
+  const ChangeImageInFirstSlide = () => {
+    setIsDisplayFirstImageInFirstSlise((isDisplayFirstImageInFirstSlise) => !isDisplayFirstImageInFirstSlise);
+    clearInterval(intervalId);
+  }
+  const ChangeToBackImageInSecondSlide = () => {
+    switch (isDisplayImageInSecondSlide) {
+      case 0: return setDisplayImageInSecondSlide(() => 2);
+      default: return setDisplayImageInSecondSlide((isDisplayImageInSecondSlide) => isDisplayImageInSecondSlide - 1);
+    }
+  }
+  const ChangeToNextImageInSecondSlide = () => {
+    switch (isDisplayImageInSecondSlide) {
+      case 2: return setDisplayImageInSecondSlide(() => 0);
+      default: return setDisplayImageInSecondSlide((isDisplayImageInSecondSlide) => isDisplayImageInSecondSlide + 1);
+    }
+  }
   return (
     <>
       <div className="header">
@@ -35,8 +56,38 @@ function App() {
         </div>
 
         <div className="advertise-slide-show">
-          <div className="second-slide"></div>
-          <div className="first-slide">
+          <div className="second-slide"
+            onMouseEnter={() => setMouseInterInSecondSlide(true)}
+            onMouseLeave={() => setMouseInterInSecondSlide(false)}
+          >
+            <div className={`second-slide-img${isDisplayImageInSecondSlide == 0 ? "active" : ""} `}>
+              <img
+                src="https://www.banimode.com/img/cms/020814/1699182597.jpg"
+                style={{ width: "100%" }}
+              />
+            </div>
+            <div className={`second-slide-img${isDisplayImageInSecondSlide == 1 ? "active" : ""} `} >
+              <img
+                src="https://www.banimode.com/img/cms/020809/1698735026.jpg"
+                style={{ width: "100%" }}
+              />
+            </div>
+            <div className={`second-slide-img${isDisplayImageInSecondSlide == 2 ? "active" : ""} `}
+            >
+              <img
+                src="https://www.banimode.com/img/cms/020814/1699181825.jpg"
+                style={{ width: "100%" }}
+              />
+            </div>
+            <div className={`slide-controll${isMouseInterInSecondSlide ? "" : "active"}`}>
+              <span onClick={ChangeToBackImageInSecondSlide} className="back-slide">{`<`}</span>
+              <span onClick={ChangeToNextImageInSecondSlide} className="next-slide">{`>`}</span>
+            </div>
+          </div>
+          <div className="first-slide"
+            onMouseEnter={() => setMouseInterInFirstSlide(true)}
+            onMouseLeave={() => setMouseInterInFirstSlide(false)}
+          >
             <div
               className={`"first-slide-img1"+ ${isDisplayFirstImageInFirstSlise} `}
             >
@@ -55,12 +106,11 @@ function App() {
               />
             </div>
 
-            <div className="slide-controll">
-              <span className="back-slide">{`<`}</span>
-              <span className="next-slide">{`>`}</span>
+            <div className={`slide-controll${isMouseInterInFirstSlide ? "" : "active"}`}>
+              <span onClick={ChangeImageInFirstSlide} className="back-slide">{`<`}</span>
+              <span onClick={ChangeImageInFirstSlide} className="next-slide">{`>`}</span>
             </div>
           </div>
-
           <div className="navbar-categoreis"></div>
         </div>
       </div>
